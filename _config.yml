@@ -68,6 +68,6 @@ theme: clean-blog
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repository: https://github.com/jokersk/jokersk.github.io.git
-  branch: master
+ type: git   
+ repository: https://github.com/jokersk/jokersk.github.io.git
+ branch: master
