@@ -17,5 +17,5 @@ tags:
 
 		curl_setopt($ch, CURLOPT_SSLVERSION, 6);
 
-不一定要用到，不過有一次再一個server上無論如何也用不到curl,然後折騰半天,加了這個就成功了。
+不一定要用到，不過有一次在一個server上無論如何也用不到curl,然後折騰半天,加了這個就成功了。
 所以加上去也應該不會死錯人。

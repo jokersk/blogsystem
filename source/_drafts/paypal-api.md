@@ -59,7 +59,7 @@ paypal 有3種比較常用的api 方法
 		}
 
 ---
-*這裡先創建一個payment*
+*拿到token后就可以創建一個payment*
 
 
 
@@ -173,3 +173,64 @@ paypal 有3種比較常用的api 方法
 
 <!-- ![GitHub Logo](/images/1.png) -->
 
+### NVP API :
+nvp api 需要用到 username , password , 和 signature 
+這三個東西在這裡搞 
+https://developer.paypal.com/docs/classic/api/apiCredentials/ 
+
+
+		public function nvp_api($amount,$custom)
+		{
+			$nvp = array(
+				    'LOCALECODE'                        => 'zh_HK',
+				    'PAYMENTREQUEST_0_PAYMENTACTION'	=> 'Sale',
+				    'PAYMENTREQUEST_0_AMT'              => $amount,
+				    'PAYMENTREQUEST_0_CURRENCYCODE'     => 'HKD', 
+				    'PAYMENTREQUEST_0_ITEMAMT'          => $amount,
+				    'PAYMENTREQUEST_0_CUSTOM'			=> $custom,
+				    'L_PAYMENTREQUEST_0_NAME0'          => 'payment name here',
+				    'L_PAYMENTREQUEST_0_DESC0'          => 'payment description here',
+				    'L_PAYMENTREQUEST_0_AMT0'           => $amount,
+					
+				    'RETURNURL'                         => return url here,
+				    'CANCELURL'				=> cancel url here,
+				    'METHOD'				=> 'SetExpressCheckout',
+				    'VERSION'				=> '124',
+				    'PAYMENTREQUEST_0_SHIPTOSTATE'      => '1', 
+				    'PWD'				=> 'your password',
+				    'USER'				=> 'your user',
+				    'SIGNATURE'			=> 'your signature' 
+			);
+
+				$curl = curl_init();
+				curl_setopt( $curl , CURLOPT_URL , 'https://api-3t.sandbox.paypal.com/nvp' );
+				curl_setopt( $curl , CURLOPT_SSL_VERIFYPEER , false );
+				curl_setopt($curl, CURLOPT_SSLVERSION, 6);
+				curl_setopt( $curl , CURLOPT_RETURNTRANSFER , 1 );
+				curl_setopt( $curl , CURLOPT_POST , 1 );
+				curl_setopt( $curl , CURLOPT_POSTFIELDS , http_build_query( $nvp ) );
+				$response = urldecode( curl_exec( $curl ) );
+				curl_close( $curl );
+				$responseNvp = array();
+				if ( preg_match_all( '/(?<name>[^\=]+)\=(?<value>[^&]+)&?/' , $response , $matches ) ) {
+					foreach ( $matches[ 'name' ] as $offset => $name ) {
+						$responseNvp[ $name ] = $matches[ 'value' ][ $offset ];
+					}
+				}
+
+				if ( isset( $responseNvp[ 'ACK' ] ) && $responseNvp[ 'ACK' ] == 'Success' ) {
+					$paypalURL = 'https://www.sandbox.paypal.com/br/cgi-bin/webscr';
+					$query = array(
+						'cmd'	=> '_express-checkout',
+						'useraction' => 'commit', 
+						'token'	=> $responseNvp[ 'TOKEN' ]
+					);
+				 	
+				 	 $paypal_link  =  $paypalURL . '?' . http_build_query( $query );
+					
+				} 
+					
+
+				header("location: ".$paypal_link);
+			
+		}
