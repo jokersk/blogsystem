@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="這裡記錄一下 paypal 的 API, 讓以後需要用到的時候可以查到。(因為我寫這篇blog的時候已經距離研究這個api的時候有一段日子了，所以我不一定下面的做法都是對的)paypal 有3種比較常用的api 方法 
+
+REST Api
+NVP Api
+HTML
+
+
+REST :這裡先說流程
+代碼">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="szeto">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="paypal API"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="夜半發燒blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>paypal API - 夜半發燒blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">夜半發燒blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/klugjo/hexo-theme-clean-blog">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>paypal API</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2016-10-07
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h2 id="這裡記錄一下-paypal-的-API-讓以後需要用到的時候可以查到。"><a href="#這裡記錄一下-paypal-的-API-讓以後需要用到的時候可以查到。" class="headerlink" title="這裡記錄一下 paypal 的 API, 讓以後需要用到的時候可以查到。"></a>這裡記錄一下 paypal 的 API, 讓以後需要用到的時候可以查到。</h2><h4 id="因為我寫這篇blog的時候已經距離研究這個api的時候有一段日子了，所以我不一定下面的做法都是對的"><a href="#因為我寫這篇blog的時候已經距離研究這個api的時候有一段日子了，所以我不一定下面的做法都是對的" class="headerlink" title="(因為我寫這篇blog的時候已經距離研究這個api的時候有一段日子了，所以我不一定下面的做法都是對的)"></a><span style="color:#83adef">(因為我寫這篇blog的時候已經距離研究這個api的時候有一段日子了，所以我不一定下面的做法都是對的)</span></h4><p>paypal 有3種比較常用的api 方法 </p>
+<ul>
+<li><strong>REST Api</strong></li>
+<li><strong>NVP Api</strong></li>
+<li><strong>HTML</strong></li>
+</ul>
+<hr>
+<h3 id="REST"><a href="#REST" class="headerlink" title="REST :"></a>REST :</h3><p>這裡先說流程</p>
+<p>代碼最重要:</p>
+<p><em>這是取得token的方法</em></p>
+<pre><code>public function gettoken()
+{
+
+
+    $ch = curl_init();
+    $clientId = &quot;your client id&quot;;
+    $secret = &quot;your secret&quot;;
+
+    curl_setopt($ch, CURLOPT_URL, &quot;https://api.sandbox.paypal.com/v1/oauth2/token&quot;);
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,0);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+    curl_setopt($ch, CURLOPT_USERPWD, $clientId.&quot;:&quot;.$secret);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, &quot;grant_type=client_credentials&quot;);
+    curl_setopt($ch, CURLOPT_SSLVERSION, 6);
+
+    $result = curl_exec($ch);
+
+    if(empty($result))die(curl_error($ch));
+    else
+    {
+        $json = json_decode($result);
+
+        $return  =  $json-&gt;access_token;
+    }
+
+    curl_close($ch);
+    return $return;
+
+}
+</code></pre><hr>
+<p><em>這裡先創建一個payment</em></p>
+<pre><code>public function rest_api(){
+    $token = $this-&gt;gettoken();
+    $payment_json = &apos;{
+        &quot;intent&quot;: &quot;sale&quot;,
+        &quot;payer&quot;: {
+            &quot;payment_method&quot;: &quot;paypal&quot;
+        },
+        &quot;redirect_urls&quot;: {
+            &quot;return_url&quot;: &quot;http://return_URL_here&quot;,
+            &quot;cancel_url&quot;: &quot;http://cancel_URL_here&quot;
+        },
+        &quot;transactions&quot;: [
+        {
+            &quot;amount&quot;: {
+                &quot;total&quot;: &quot;8.00&quot;,
+                &quot;currency&quot;: &quot;HKD&quot;,
+                &quot;details&quot;: {
+                    &quot;subtotal&quot;: &quot;6.00&quot;,
+                    &quot;tax&quot;: &quot;1.00&quot;,
+                    &quot;shipping&quot;: &quot;1.00&quot;
+                }
+            },
+            &quot;description&quot;: &quot;This is payment description.&quot;,
+            &quot;item_list&quot;: { 
+                &quot;items&quot;:[
+                {
+                    &quot;quantity&quot;:&quot;3&quot;, 
+                    &quot;name&quot;:&quot;Hat&quot;, 
+                    &quot;price&quot;:&quot;2.00&quot;,  
+                    &quot;sku&quot;:&quot;product12345&quot;, 
+                    &quot;currency&quot;:&quot;HKD&quot;
+                }
+                ]
+            }
+        }
+        ]
+    }&apos;;
+
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, &quot;https://api.sandbox.paypal.com/v1/payments/payment&quot;);
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,0);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        &apos;Authorization: Bearer &apos;.$token,
+        &apos;Accept: application/json&apos;,
+        &apos;Content-Type: application/json&apos;
+        ));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $payment_json);
+    curl_setopt($ch, CURLOPT_SSLVERSION, 6);
+
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+    $array = json_decode($result);
+    // var_dump($array);
+    $redirect_urls = $array-&gt;links[&apos;1&apos;]-&gt;href;
+    header(&quot;location: &quot;.$redirect_urls); 
+
+}
+</code></pre><p>裡面的 </p>
+<pre><code>$token = $this-&gt;gettoken();
+</code></pre><p>就是用了上面的 get token 方法取的那個token </p>
+<p>其中 </p>
+<pre><code>$redirect_urls = $array-&gt;links[&apos;1&apos;]-&gt;href;
+</code></pre><p>這裡會因為創建這個payment 之後 paypal 會 return 一串 json 來， 其中包括大概這樣子的東西： </p>
+<pre><code>&quot;links&quot;:[
+{
+  &quot;href&quot;:&quot;https://api.sandbox.paypal.com/v1/payments/payment/PAY-6RV70583SB702805EKEYSZ6Y&quot;,
+  &quot;rel&quot;:&quot;self&quot;,
+  &quot;method&quot;:&quot;GET&quot;
+},
+{
+  &quot;href&quot;:&quot;https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&amp;token=EC-60U79048BN7719609&quot;,
+  &quot;rel&quot;:&quot;approval_url&quot;,
+  &quot;method&quot;:&quot;REDIRECT&quot;
+},
+{
+  &quot;href&quot;:&quot;https://api.sandbox.paypal.com/v1/payments/payment/PAY-6RV70583SB702805EKEYSZ6Y/execute&quot;,
+  &quot;rel&quot;:&quot;execute&quot;,
+  &quot;method&quot;:&quot;POST&quot;
+}
+  ]
+</code></pre><p>一個 “link” 的array. 我們要的就是中間的  <a href="https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&amp;token=EC-60U79048BN7719609" target="_blank" rel="external">https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&amp;token=EC-60U79048BN7719609</a><br>然後我們用 </p>
+<pre><code>header(&quot;location: &quot;.$redirect_urls); 
+</code></pre><p>跳到這里，這時候其實就去了付款的頁面了. </p>
+<h4 id="我寫這篇文章的時候，paypal正在換付款的layout，所以有些人看到會是新的界面，有些人看到舊的界面。這個是要看臉的"><a href="#我寫這篇文章的時候，paypal正在換付款的layout，所以有些人看到會是新的界面，有些人看到舊的界面。這個是要看臉的" class="headerlink" title="(我寫這篇文章的時候，paypal正在換付款的layout，所以有些人看到會是新的界面，有些人看到舊的界面。這個是要看臉的)"></a><span style="color:#83adef">(我寫這篇文章的時候，paypal正在換付款的layout，所以有些人看到會是新的界面，有些人看到舊的界面。這個是要看臉的)</span></h4><p>在付款的頁面, 買家就會付款購買，然後會跳轉會你之前set的那個return_url里的link,<br>當然如果買家不買了cancel了,就會跳轉到cancel_url的link里。</p>
+<!-- ![GitHub Logo](/images/1.png) -->
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+               
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
