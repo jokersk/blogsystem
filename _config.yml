@@ -6,7 +6,9 @@
 title: 夜半發燒blog
 subtitle:
 description:
-author: John Doe
+
+author: szeto
+
 language:
 timezone:
 
@@ -68,4 +70,8 @@ theme: clean-blog
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+
+ type: git   
+ repository: https://github.com/jokersk/jokersk.github.io.git
+ branch: master
+
