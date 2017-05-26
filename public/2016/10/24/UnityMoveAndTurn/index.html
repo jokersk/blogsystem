@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="在這裡記錄一下unity對一個rigidbody最簡單的move 跟 turn 
+Movemove 就是移動，這裡用的是 MovePosition， 官網是這樣寫的 
+public void MovePosition(Vector3 position);
+Vector3是一個3D 的點，按照我的理解">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="John Doe">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Unity Move and Turn"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Hexo"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Unity Move and Turn - Hexo</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+	
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Configurable Title</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/klugjo/hexo-theme-clean-blog">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Unity Move and Turn</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2016-10-24
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/unity-C/">#unity, C#</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>在這裡記錄一下unity對一個rigidbody最簡單的move 跟 turn </p>
+<h3 id="Move"><a href="#Move" class="headerlink" title="Move"></a>Move</h3><p>move 就是移動，這裡用的是 MovePosition， 官網是這樣寫的 </p>
+<pre><code>public void MovePosition(Vector3 position);
+</code></pre><p>Vector3是一個3D 的點，<br>按照我的理解，就是直接給這個rigidbody一個新的位置，然後簡單粗暴地移動到新的位置，沒有考慮重力，摩擦摩擦等因素。<br>舉一個栗子： </p>
+<pre><code>float v = Input.GetAxis (&quot;Vertical&quot;);
+Vector3 movement = transform.forward * v * Speed * Time.deltaTime;
+rigidbody.MovePosition(rigidbody.position + movement);
+</code></pre><p>這樣，這個rigidbody就會不停向前走</p>
+<h3 id="Turn"><a href="#Turn" class="headerlink" title="Turn"></a>Turn</h3><p>turn  就是旋轉， 比移動要複雜一點點。 這裡用的是 MoveRotation， 同樣，官網是這樣寫的 </p>
+<pre><code>public void MoveRotation(Quaternion rot);
+</code></pre><p>注意，這裡的參數系Quaternion, 中文是四元数（握草，什麼鬼）。<br>要搞到這個Quaternion，我們要用unity 的 Quaternion.Euler 方法 </p>
+<pre><code>Quaternion Euler(float x, float y, float z);
+</code></pre><h5 id="Returns-a-rotation-that-rotates-z-degrees-around-the-z-axis"><a href="#Returns-a-rotation-that-rotates-z-degrees-around-the-z-axis" class="headerlink" title="Returns a rotation that rotates z degrees around the z axis,"></a>Returns a rotation that rotates z degrees around the z axis,</h5><h5 id="x-degrees-around-the-x-axis-and-y-degrees-around-the-y-axis-in-that-order"><a href="#x-degrees-around-the-x-axis-and-y-degrees-around-the-y-axis-in-that-order" class="headerlink" title="x degrees around the x axis, and y degrees around the y axis (in that order)."></a>x degrees around the x axis, and y degrees around the y axis (in that order).</h5><p>這個function是傳入x,y,z三個 float ，輸出 Quaternion , 有了這個Quaternion之後就可以用來旋轉<br>這個rigidbody 了，下面是例子：  </p>
+<pre><code>float turn = Input.GetAxis (&quot;Horizontal&quot;) * Speed * Time.deltaTime;
+
+Quaternion turnRotation = Quaternion.Euler (0f, turn, 0f);
+
+rigidbody.MoveRotation (rigidbody.rotation * turnRotation);
+</code></pre><p>其實也可以直接這樣</p>
+<pre><code>rigidbody.rotation = turnRotation;
+</code></pre><p>因為rigidbody.rotation 本身就是一個 Quaternion。 </p>
+<p>如果想一個rigidbody 總是看著另一個rigidbody 就可以用 Quaternion.LookRotation(Vector3 forward, Vector3 upwards = Vector3.up)<br>方法計算出一個Quaternion </p>
+<pre><code>public static Quaternion LookRotation(Vector3 forward, Vector3 upwards = Vector3.up);
+</code></pre><p>或者更直接用 Transform.LookAt </p>
+<pre><code>public void LookAt(Transform target, Vector3 worldUp = Vector3.up);
+
+public Transform target;
+
+void Update() {
+    // Rotate the camera every frame so it keeps looking at the target 
+    transform.LookAt(target);
+}
+</code></pre><p>上面就是對於一個 rigidbody的移動和旋轉的方法。</p>
+<h3 id="這裡再稍微說一下-MovePosition-跟-Rigidbody-AddForce-的區別"><a href="#這裡再稍微說一下-MovePosition-跟-Rigidbody-AddForce-的區別" class="headerlink" title="這裡再稍微說一下 MovePosition 跟 Rigidbody.AddForce() 的區別"></a>這裡再稍微說一下 MovePosition 跟 Rigidbody.AddForce() 的區別</h3><p>MovePosition 是提供一個新的位置，讓rigidbody 從舊的位置去到新的位置，可以實現瞬移，跟物理學沒有半點關係 （瞬移根本就違反物理學， ps:這裡是2016年的物理學）<br>addforce 是加一個力給這個rigidbody 讓它移動，像推它，踢它甚至爆炸的力，如果摩擦力為0，根據物理學，物體會一直運動， addforce 不能實現瞬移。 </p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/klugjo/hexo-theme-clean-blog" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2017 John Doe<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
